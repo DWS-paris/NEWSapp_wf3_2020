@@ -5,8 +5,12 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
-  // Déclaration d'une variable de type String
+  // Déclaration de variables de type String
   public title: String = "My <i>Newsapp</i>";
+  public titleFr: String = "Mon <i>Application de nouvelles</i>";
+
+  // Déclaration d'une variable de type Boolean
+  public isFrench: Boolean = false;
 
   constructor() { }
 

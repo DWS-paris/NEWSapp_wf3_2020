@@ -1,6 +1,8 @@
 <header>
     <!-- Afficher le contenu d'une variable {{VAR}} || [textContent]="VAR" || [innerHTML]="VAR" -->
-    <h1 [innerHTML]="title"></h1>
+    <!-- Mise en place d'une condition dans le vue HTML -->
+    <h1 [innerHTML]="title" *ngIf="!isFrench"></h1>
+    <h1 [innerHTML]="titleFr" *ngIf="isFrench"></h1>
     
     <nav>
         <ul>
@@ -13,6 +15,16 @@
             </li>
             <li>
                 <a [routerLink]="'/single'">Article</a>
+            </li>
+            <li>
+                <!-- Utilisation de la directive (click) -->
+                <button (click)="isFrench = true" *ngIf="!isFrench">
+                    <!-- Les fichiers statiques doivent être dans le dossier "asstes" -->
+                    <img src="/assets/img/frenchFlag.png" alt="Drapeau français" class="smallImg">
+                </button>
+                <button (click)="isFrench = false" *ngIf="isFrench">
+                    <img src="/assets/img/englishFlag.png" alt="English flag"  class="smallImg">
+                </button>
             </li>
         </ul>
     </nav>

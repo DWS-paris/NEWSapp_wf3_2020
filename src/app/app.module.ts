@@ -11,6 +11,16 @@ Gestion des routes
   import { AppRouterModule } from "./app.router";
 //
 
+/* 
+Gestion des requêtes HTTP
+*/
+  // Importer le module Angular pour gérer des requête HTTP
+  import { HttpClientModule } from "@angular/common/http";
+
+  // Import des services de l'application
+  import { CrudService } from "./services/crud/crud.service";
+//
+
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './routes/home-page/home-page.component';
 import { NewspaperPageComponent } from './routes/newspaper-page/newspaper-page.component';
@@ -30,9 +40,11 @@ import { FooterComponent } from './statics/footer/footer.component';
   imports: [
     BrowserModule,
     // Configuration du module du router
-    RouterModule.forRoot( AppRouterModule, { onSameUrlNavigation: 'reload' } )
+    RouterModule.forRoot( AppRouterModule, { onSameUrlNavigation: 'reload' } ),
+    HttpClientModule
   ],
-  providers: [],
+  // Ajouter les sevices dans le tableau des providers
+  providers: [ CrudService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

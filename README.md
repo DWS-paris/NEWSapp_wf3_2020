@@ -2,6 +2,8 @@
 
 Création d'une application Angular utilisant Newsapp.org pour WebForce3 Sud 2020
 
+Lien vers le répertoire GitHub du projet https://github.com/DWS-paris/NEWSapp_wf3_2020
+
 # Etapes de réalisation
 
 ## Création des composants
@@ -173,6 +175,42 @@ Il est possible d'afficher le valeur de la variable `title` dans le fichier `hea
 <h1 [textContent]="title"></h1>
 ```
 
+A présent nous allons simuler la gestion d'une langue pour mettre à jour le titre de la balise h1, pour cela nous allons devoir créer deux nouvelles variables : 
+
+```ts
+public titleFr: String = "Mon <i>Application de nouvelles</i>";
+
+// Déclaration d'une variable de type Boolean
+public isFrench: Boolean = true;
+```
+
+Une fois c'est variables créées nous pouvons les utiliser dans le fichier `header.component.html` pour afficher le titre en français si la valeur de la variable `isFrench` est égale à `true` grâce à la directive `*ngIf` de la manière suivante : 
+```html
+<!-- Mise en place d'une condition dans le vue HTML -->
+<h1 [innerHTML]="title" *ngIf="!isFrench"></h1>
+<h1 [innerHTML]="titleFr" *ngIf="isFrench"></h1>
+```
+
+Pour finaliser cette simulation nous allons à présent ajouter un bouton dans le fichier `header.component.html` grâce auquel nous pourrons capter l'évènement `click`pour passer d'une langue à l'autre : 
+
+```html
+<!-- Utilisation de la directive (click) -->
+<button (click)="isFrench = true" *ngIf="!isFrench">FR</button>
+<button (click)="isFrench = false" *ngIf="isFrench">EN</button>
+```
+
+Nous allons à présent ajouter des images pour les drapeaux de langues, en Angular tous les fichier statiques (image, pdf, vidéo, tout autre type de document) doivent obligatoirement se trouver dans le dossiers `assets`, sinon Angular est incapable de lier vos fichiers à la vue HTML. Le code des boutons devient : 
+
+```html
+<button (click)="isFrench = true" *ngIf="!isFrench">
+    <!-- Les fichiers statiques doivent être dans le dossier "asstes" -->
+    <img src="/assets/img/frenchFlag.png" alt="Drapeau français">
+</button>
+<button (click)="isFrench = false" *ngIf="isFrench">
+    <img src="/assets/img/englishFlag.png" alt="English flag">
+</button>
+```
+
 Un autre grand principe d'Angular est de pouvoir réaliser des boucle directement dans la vue HTML, pour cela il faut créer un tableau dans le contrôleur que nous utiliserons ensuite dans la vue pour réaliser la boucle. Nous allons prendre en exemple le `footer` dans laquel nous allons ajouter des liens vers les réseaux sociaux. Nous allons donc ouvrir le fichier `footer.component.ts` pour y ajouter le tableau suivant : 
 
 ```ts
@@ -206,3 +244,63 @@ Une fois le tableau créé, il est possible de réaliser directement sur la vue 
 ```
 
 > Il faut au préalable importer FontAwesome dans le fichier `index.html`
+
+## Mise en place d'un service
+
+Un fichier de service est prévu pour pouvoir charger des données depuis une API (au format JSON) afin de créer des balises HTML contenant les données reçues depuis l'API. Nous allons commencer par générer un service avec la commande : 
+
+```bash
+ng g s services/crud/crud
+```
+
+Une fois le fichier créé il faut y ajouter le ode suivant : 
+
+```ts
+import { Injectable } from '@angular/core';
+
+// Importer le module HttpClient pour gérer des requêtes HTTP (POST, GET, PUT ou DELETE)
+import { HttpClient } from "@angular/common/http";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CrudService {
+
+  // Injecter le module HttpClient dans le service
+  constructor(
+    private HttpClient: HttpClient
+  ) { }
+
+  /* 
+  Créer une fonction pour les requête HTTP GET
+  */
+    public getRequest = (url) => {
+      // Renvoyer une requête HttpClient sous la forme d'une promesse
+      return this.HttpClient.get(url).toPromise()
+      .then( data => data ) // En cas de succès
+      .catch( err => err ) // En cas d'erreur
+    }
+  //
+}
+```
+
+Une fois le fichier `crud.service.ts` contient le code ci-dessus, nous devons our pouvoir l'utiliser dans notre application l'intégrer dans le fichier `app.module.ts` qui est celui qui configure l'application au niveau global. Dans un premier temps il faut importer le `HttpClientModule` et le service `CrudService` dans le fichier `app.module.ts` : 
+
+```ts
+// Importer le module Angular pour gérer des requête HTTP
+import { HttpClientModule } from "@angular/common/http";
+
+// Import des services de l'application
+import { CrudService } from "./services/crud/crud.service";
+```
+
+> Ne pas oublier d'ajouter `HttpClientModule` dans le tableau des imports
+
+Puis, pour rendre accessible le service `CrudService`, il faut 'ajouter dans le tableau des providers : 
+
+```ts
+...
+// Ajouter les sevices dans le tableau des providers
+providers: [ CrudService ],
+...
+```
