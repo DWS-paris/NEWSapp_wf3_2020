@@ -16,7 +16,7 @@ export class CrudService {
   /* 
   Créer une fonction pour les requête HTTP GET
   */
-    public getRequest = (url) => {
+    public getRequest = (url: string) => {
       // Renvoyer une requête HttpClient sous la forme d'une promesse
       return this.HttpClient.get(url).toPromise()
       .then( data => data ) // En cas de succès

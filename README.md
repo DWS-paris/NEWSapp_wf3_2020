@@ -304,3 +304,25 @@ Puis, pour rendre accessible le service `CrudService`, il faut 'ajouter dans le 
 providers: [ CrudService ],
 ...
 ```
+
+Pour utiliser les fonctions du service, il faut importer le service dans le composant souhaité, dans notre cas nous allons mettre à jour le fichier `home-page.component.ts` : 
+
+```ts
+// importer le fichier crud.service.ts
+import { CrudService } from "../../services/crud/crud.service";
+```
+
+Puis nous allons créer une fonction pour utiliser la fonction `getRequest` du service : 
+
+```ts
+private getSources = () => {
+    // Utiliser la fonction getRequest du service
+    this.CrudService.getRequest('https://newsapi.org/v2/sources?apiKey=97fccbac2fae46b4a05123f1b5aa016b')
+    .then( data => {
+        console.log(data)
+    })
+    .catch( err => {
+        console.error(err);
+    });
+};
+```
