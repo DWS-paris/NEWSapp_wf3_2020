@@ -4,6 +4,8 @@
     <article *ngFor="let item of sourceCollection">
         <h2 [innerHTML]="item.name"></h2>
         <p [innerHTML]="item.description"></p>
-        <button>Lire les news</button>
+
+        <!-- Capter l'évènement click -->
+        <button (click)="changeRoute(item.id)">Lire les news</button>
     </article>
 </section>

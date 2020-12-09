@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-// importer le fichier crud.service.ts
+// Importer le fichier crud.service.ts
 import { CrudService } from "../../services/crud/crud.service";
+
+// Importer le module qui permet de naviguer entre les routes
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-home-page',
@@ -13,8 +16,15 @@ export class HomePageComponent implements OnInit {
 
   // Injecter le CrudService dans la classe
   constructor(
-    private CrudService: CrudService
+    private CrudService: CrudService,
+    private Router: Router
   ) { }
+
+  // Créer une fonction pour changer de route
+  public changeRoute = (id: String) => {
+    // Changer la route pour afficher la liste des articles pour l'id spécifié
+    this.Router.navigateByUrl('/newspaper/' + id);
+  }
 
   // Créer une fonction pour utiliser le service
   private getSources = () => {
