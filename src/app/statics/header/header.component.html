@@ -11,12 +11,6 @@
                 <a [routerLink]="'/'">Accueil</a>
             </li>
             <li>
-                <a [routerLink]="'/newspaper'">Journal</a>
-            </li>
-            <li>
-                <a [routerLink]="'/single'">Article</a>
-            </li>
-            <li>
                 <!-- Utilisation de la directive (click) -->
                 <button (click)="changeLanguagePref('fr')" *ngIf="!isFrench">
                     <!-- Les fichiers statiques doivent être dans le dossier "asstes" -->
