@@ -1,0 +1,11 @@
+<footer>
+    <p>Under <a href="https://en.wikipedia.org/wiki/WFPL" target="_blank">WFPL</a> / &copy; 2020 for WebForce3</p>
+
+    <ul>
+        <!-- utilisation de la directive *ngFor pour réaliser une boucle dnas le vue -->
+        <li *ngFor="let item of socialNetworks">
+            <!-- Afficher une balise a avec le bon contenu et le bon lien -->
+            <a [href]="item.link" target="_blank" [innerHTML]="item.icon"></a>
+        </li>
+    </ul>
+</footer>

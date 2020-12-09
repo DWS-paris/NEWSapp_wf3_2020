@@ -1,0 +1,19 @@
+<header>
+    <!-- Afficher le contenu d'une variable {{VAR}} || [textContent]="VAR" || [innerHTML]="VAR" -->
+    <h1 [innerHTML]="title"></h1>
+    
+    <nav>
+        <ul>
+            <li>
+                <!-- Utiliser la directive (attribut spécifique) "routerLink" pour changer de route -->
+                <a [routerLink]="'/'">Accueil</a>
+            </li>
+            <li>
+                <a [routerLink]="'/newspaper'">Journal</a>
+            </li>
+            <li>
+                <a [routerLink]="'/single'">Article</a>
+            </li>
+        </ul>
+    </nav>
+</header>
