@@ -1,1 +1,10 @@
-<p>newspaper-page works!</p>
+<!-- Afficher une section uniquement si postCollection est différent de null -->
+<section *ngIf="postCollection !== null">
+    <!-- Créer un article pour chaque item de la collection postCollection -->
+    <article *ngFor="let item of postCollection">
+        <h2 [innerHTML]="item.title"></h2>
+        <p [innerHTML]="item.author"></p>
+
+        <button>Lire l'article</button>
+    </article>
+</section>

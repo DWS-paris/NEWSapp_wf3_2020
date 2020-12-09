@@ -11,6 +11,8 @@ import { CrudService } from "../../services/crud/crud.service";
   templateUrl: './newspaper-page.component.html'
 })
 export class NewspaperPageComponent implements OnInit {
+  // Déclarer une variable pour la liste des article
+  public postCollection: Array<any> = null;
 
   // Injecter ActivatedRoute dans le composant
   constructor(
@@ -22,7 +24,8 @@ export class NewspaperPageComponent implements OnInit {
       // Utiliser la fonction getRequest du CrudService
       this.CrudService.getRequest('https://newsapi.org/v2/everything?sources=' + params.id + '&apiKey=97fccbac2fae46b4a05123f1b5aa016b')
       .then( data => {
-        console.log(data);
+        // Ajouter la liste des articles dans la variable postCollection
+        this.postCollection = data.articles;
       })
       .catch( err => {
         console.error(err);
