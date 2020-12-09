@@ -335,3 +335,49 @@ ngOnInit(): void {
     this.getSources();
 }
 ```
+
+# Gestion des paramètre des routes
+
+Nous allons à présent modifier notre fichier`app.router.ts` afin d'y intégrer un paramètre pour les routes `newspaper` et et `single`. En effet, c'est deux routes doivent être capable de d'afficher le contenu uniquement d'un journal ou d'un article, nous allons donc les modifier de la façon suivante : 
+
+```ts
+{
+    // Ajouter un parmètre id
+    path: 'newspaper/:id',
+    component: NewspaperPageComponent
+},
+{
+    path: 'single/:id',
+    component: SinglePageComponent
+}
+```
+
+Il est maintenant important d'être capable de reconnaitre le paramètre dans chacun des composants qui utilisent des paramètre dans les routes. Nous allons prendre en exemple le fichier `newspaper-page.component.ts` et dans un premier temps y importer le module `ActivatedRoute` qui permet de connaître les paramètres d'une route : 
+
+```ts
+import { Component, OnInit } from '@angular/core';
+
+// Importer le module pour récupérer la valeur des praramètres de la route
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-newspaper-page',
+  templateUrl: './newspaper-page.component.html'
+})
+export class NewspaperPageComponent implements OnInit {
+
+  // Injecter ActivatedRoute dans le composant
+  constructor(
+    private ActivatedRoute: ActivatedRoute
+  ) {
+    // Capter la valeur du paramètre de la route
+    this.ActivatedRoute.params.subscribe( params => {
+      console.log(params);
+    });
+  }
+
+  ngOnInit(): void {
+  }
+
+}
+```

@@ -13,11 +13,12 @@ export const AppRouterModule: Routes = [
         component: HomePageComponent // => Composant à utiliser dans l'URL
     },
     {
-        path: 'newspaper',
+        // Ajouter un parmètre id
+        path: 'newspaper/:id',
         component: NewspaperPageComponent
     },
     {
-        path: 'single',
+        path: 'single/:id',
         component: SinglePageComponent
     }
 ];
