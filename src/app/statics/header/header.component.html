@@ -18,11 +18,11 @@
             </li>
             <li>
                 <!-- Utilisation de la directive (click) -->
-                <button (click)="isFrench = true" *ngIf="!isFrench">
+                <button (click)="changeLanguagePref('fr')" *ngIf="!isFrench">
                     <!-- Les fichiers statiques doivent être dans le dossier "asstes" -->
                     <img src="/assets/img/frenchFlag.png" alt="Drapeau français" class="smallImg">
                 </button>
-                <button (click)="isFrench = false" *ngIf="isFrench">
+                <button (click)="changeLanguagePref('en')" *ngIf="isFrench">
                     <img src="/assets/img/englishFlag.png" alt="English flag"  class="smallImg">
                 </button>
             </li>

@@ -26,6 +26,7 @@ export class NewspaperPageComponent implements OnInit {
       .then( data => {
         // Ajouter la liste des articles dans la variable postCollection
         this.postCollection = data.articles;
+        console.log(this.postCollection)
       })
       .catch( err => {
         console.error(err);
@@ -35,5 +36,4 @@ export class NewspaperPageComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

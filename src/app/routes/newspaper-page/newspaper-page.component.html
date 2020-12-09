@@ -4,7 +4,6 @@
     <article *ngFor="let item of postCollection">
         <h2 [innerHTML]="item.title"></h2>
         <p [innerHTML]="item.author"></p>
-
-        <button>Lire l'article</button>
+        <a [href]="item.url" target="_blank">Lire l'article</a>
     </article>
 </section>

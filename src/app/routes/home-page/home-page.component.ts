@@ -27,9 +27,9 @@ export class HomePageComponent implements OnInit {
   }
 
   // Créer une fonction pour utiliser le service
-  private getSources = () => {
+  private getSources = (language: String) => {
     // Utiliser la fonction getRequest du service
-    this.CrudService.getRequest('https://newsapi.org/v2/sources?apiKey=97fccbac2fae46b4a05123f1b5aa016b')
+    this.CrudService.getRequest('https://newsapi.org/v2/sources?language=' + language + '&apiKey=97fccbac2fae46b4a05123f1b5aa016b')
     .then( data => {
       // Intégrer la réponse de l'API dans la variable sourceCollection
       this.sourceCollection = data.sources;
@@ -41,6 +41,6 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     // Charger le contenu une fois que le composant est chargé
-    this.getSources();
+    this.getSources(localStorage.getItem('lang-pref'));
   }
 }
