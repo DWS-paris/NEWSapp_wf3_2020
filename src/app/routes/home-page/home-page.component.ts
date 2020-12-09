@@ -8,6 +8,8 @@ import { CrudService } from "../../services/crud/crud.service";
   templateUrl: './home-page.component.html'
 })
 export class HomePageComponent implements OnInit {
+  // Déclarer une variables pour la liste des sources
+  public sourceCollection: Array<any> = null;
 
   // Injecter le CrudService dans la classe
   constructor(
@@ -19,7 +21,8 @@ export class HomePageComponent implements OnInit {
     // Utiliser la fonction getRequest du service
     this.CrudService.getRequest('https://newsapi.org/v2/sources?apiKey=97fccbac2fae46b4a05123f1b5aa016b')
     .then( data => {
-      console.log(data)
+      // Intégrer la réponse de l'API dans la variable sourceCollection
+      this.sourceCollection = data.sources;
     })
     .catch( err => {
       console.error(err);

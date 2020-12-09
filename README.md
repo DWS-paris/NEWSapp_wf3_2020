@@ -326,3 +326,12 @@ private getSources = () => {
     });
 };
 ```
+
+Puis nous appelons la fonction créée au chargement du composant : 
+
+```ts
+ngOnInit(): void {
+    // Charger le contenu une fois que le composant est chargé
+    this.getSources();
+}
+```
